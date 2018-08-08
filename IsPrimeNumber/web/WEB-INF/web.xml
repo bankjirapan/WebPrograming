@@ -4,9 +4,17 @@
         <servlet-name>IsPrimeNumberController</servlet-name>
         <servlet-class>Controller.IsPrimeNumberController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestRequestParamServlet</servlet-name>
+        <servlet-class>Controller.TestRequestParamServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IsPrimeNumberController</servlet-name>
         <url-pattern>/IsPrimeNumberController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestRequestParamServlet</servlet-name>
+        <url-pattern>/TestRequestParamServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

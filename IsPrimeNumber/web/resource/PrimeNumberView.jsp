@@ -29,7 +29,7 @@
                         </form>
                     </div>
                 </div>
-              <div class="card-footer bg-transparent border-primary"><div>Result</div>
+              <div class="card-footer bg-transparent border-primary">
                     Number : ${pn.numberInput} ${pn.prime}</div>
             </div>
 
