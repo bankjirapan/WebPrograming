@@ -73,12 +73,20 @@ public final class ReadProduct_jsp extends org.apache.jasper.runtime.HttpJspBase
         
       out.write("\n");
       out.write("        <table>\n");
-      out.write("            ");
+      out.write("            <thead>\n");
+      out.write("            <th>#</th>\n");
+      out.write("            <th>Code</th>\n");
+      out.write("            <th>Name</th>\n");
+      out.write("            <th>Scale</th>\n");
+      out.write("            <th>Vendor</th>\n");
+      out.write("            <th>Price</th>\n");
+      out.write("        </thead>\n");
+      out.write("        ");
       if (_jspx_meth_c_forEach_0(_jspx_page_context))
         return;
       out.write("\n");
-      out.write("        </table>\n");
-      out.write("    </body>\n");
+      out.write("    </table>\n");
+      out.write("</body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -110,27 +118,27 @@ public final class ReadProduct_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\n");
-          out.write("                <tr>\n");
-          out.write("                    <td>");
+          out.write("            <tr>\n");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${vs.count}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                    <td>");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.productCode}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                    <td>");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.productName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                    <td>");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.productLine}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                    <td>");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.productVendor}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                    <td>");
+          out.write("                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.msrp}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
-          out.write("                </tr>\n");
-          out.write("            ");
+          out.write("            </tr>\n");
+          out.write("        ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
