@@ -7,6 +7,8 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,15 @@ public class TestRequestParameterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String id = request.getParameter("Id");
+        String name = request.getParameter("Name");
+        String[] subject = request.getParameterValues("Subject");
+        
+        List<String> subjectList = new ArrayList();
+        for (String subjects : subject) {
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,7 +57,9 @@ public class TestRequestParameterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String testRequestview = "/resource/TestRequestView.jsp";
+        getServletContext().getRequestDispatcher(testRequestview).forward(request, response);
     }
 
     /**
