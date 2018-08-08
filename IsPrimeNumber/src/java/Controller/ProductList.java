@@ -7,20 +7,21 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sit.int303.mockup.model.Product;
+import sit.int303.mockup.model.ProductMockup;
 
 /**
  *
  * @author INT303
  */
-@WebServlet(name = "TestRequestParameterServlet", urlPatterns = {"/TestRequestParameterServlet"})
-public class TestRequestParameterServlet extends HttpServlet {
+@WebServlet(name = "ProductList", urlPatterns = {"/ProductList"})
+public class ProductList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +35,16 @@ public class TestRequestParameterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //รับค่าจาก Parameter
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
+        String fileLocation = getServletContext().getRealPath("/");
+        String absoluteFileName = fileLocation +  "WEB-INF\\products.txt";
         
-        //รับ Parameter Array String
-        String[] subjects = request.getParameterValues("subjects");
+        ProductMockup.setFileLocation(fileLocation);
+        List<Product> products = ProductMockup.getProducts();
         
-        // new ArrayList
-        List<String> subjectList = new ArrayList();
-       // For each for add String to array list
-        for (String subject : subjects) {
-            subjectList.add(subject);
-        }
-        
-        //Send subject
-        
-        request.setAttribute("subjectList", subjectList);
-        String testRequestview = "/resource/ViewPamJsp.jsp";
-        getServletContext().getRequestDispatcher(testRequestview).forward(request, response);
-        
+        request.setAttribute("product",products);
+        getServletContext().getRequestDispatcher("/resource/ProductList.jsp").forward(request, response);
+        //System.out.println(absoluteFileName);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,9 +59,7 @@ public class TestRequestParameterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-          String testRequestview = "/resource/ViewPamJsp.jsp";
-        getServletContext().getRequestDispatcher(testRequestview).forward(request, response);
+        processRequest(request, response);
     }
 
     /**
