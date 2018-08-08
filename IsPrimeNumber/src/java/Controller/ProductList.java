@@ -38,10 +38,10 @@ public class ProductList extends HttpServlet {
         String fileLocation = getServletContext().getRealPath("/");
         String absoluteFileName = fileLocation +  "WEB-INF\\products.txt";
         
-        ProductMockup.setFileLocation(fileLocation);
+        ProductMockup.setFileLocation(absoluteFileName);
         List<Product> products = ProductMockup.getProducts();
         
-        request.setAttribute("product",products);
+        request.setAttribute("products",products);
         getServletContext().getRequestDispatcher("/resource/ProductList.jsp").forward(request, response);
         //System.out.println(absoluteFileName);
        
