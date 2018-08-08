@@ -34,14 +34,25 @@ public class TestRequestParameterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String id = request.getParameter("Id");
-        String name = request.getParameter("Name");
-        String[] subject = request.getParameterValues("Subject");
+        //รับค่าจาก Parameter
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
         
+        //รับ Parameter Array String
+        String[] subjects = request.getParameterValues("subjects");
+        
+        // new ArrayList
         List<String> subjectList = new ArrayList();
-        for (String subjects : subject) {
-            
+       // For each for add String to array list
+        for (String subject : subjects) {
+            subjectList.add(subject);
         }
+        
+        //Send subject
+        
+        request.setAttribute("subjectList", subjectList);
+        String testRequestview = "/resource/ViewPamJsp.jsp";
+        getServletContext().getRequestDispatcher(testRequestview).forward(request, response);
         
     }
 
