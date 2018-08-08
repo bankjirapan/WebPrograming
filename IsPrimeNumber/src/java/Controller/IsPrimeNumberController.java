@@ -30,31 +30,16 @@ public class IsPrimeNumberController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        String CheckSubmitForm = request.getParameter("InputNumber");
+        int InputNum = Integer.valueOf(request.getParameter("InputNumber"));
+        CheckPrime check = new CheckPrime();
 
-            //Request user
-            int NumberInput = Integer.valueOf(request.getParameter("InputNumber"));
-            
-            CheckPrime is_prime = new CheckPrime();
-            
-            is_prime.setNumberInput(NumberInput);
-            
-            request.setAttribute("isPrimeNumber", is_prime);
-            getServletContext().getRequestDispatcher("/resource/ResultPrime.jsp").forward(request, response);
-            /*
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IsPrimeNumberController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>"+is_prime.CheckPrime()+"</h1>");
-            out.println("</body>");
-            out.println("</html>");
-             */
+        if (CheckSubmitForm != null) {
+            check.setNumberInput(InputNum);
+            request.setAttribute("pn", check);
         }
+
+        getServletContext().getRequestDispatcher("/resource/PrimeNumberView.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
