@@ -11,10 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
-         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,15 +26,15 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/IsPrimeNumber/resource/PrimeNumberView.jsp">CheckPrime</a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="TestRequestParameterServlet">TestRequest</a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="ProductList">ProductList</a>
                     </li>
                 </ul>
-                   
-                
+
+
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -42,7 +43,7 @@
         </nav>
         <div class="container">
             <h1>Product LIST</h1>
-            <table class="table table-dark table-striped">
+            <table id="example"  class="table table-striped">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -51,24 +52,34 @@
                         <th>Product Line</th>
                         <th>Scale</th>
                         <th>Price</th>
+                        <th>IMG</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${products}" var="p" varStatus="vs">
 
                         <tr>
+
                             <td>${vs.count}</td>
                             <td>${p.productCode}</td>
                             <td>${p.productName}</td>
                             <td>${p.productLine}</td>
                             <td>${p.productScale}</td>
                             <td>${p.msrp}</td>
-                        </tr>
-                    </c:forEach>
+                            <td> <img src="model-images/${p.productCode}.jpg" width="70px" height="70px"></td>
+                    </tr>
+                </c:forEach>
 
                 </tbody>
             </table>
-
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#example').DataTable();
+                });
+            </script>
         </div>
     </body>
 </html>
