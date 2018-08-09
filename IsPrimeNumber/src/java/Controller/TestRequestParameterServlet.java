@@ -46,6 +46,7 @@ public class TestRequestParameterServlet extends HttpServlet {
        // For each for add String to array list
         for (String subject : subjects) {
             subjectList.add(subject);
+            
         }
         
         //Send subject

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,13 +31,27 @@ public class IsPrimeNumberController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //ดึงค่า session
+        HttpSession session = request.getSession(true);
+        
         String CheckSubmitForm = request.getParameter("InputNumber");
         int InputNum = Integer.valueOf(request.getParameter("InputNumber"));
         CheckPrime check = new CheckPrime();
 
         if (CheckSubmitForm != null) {
-            check.setNumberInput(InputNum);
-            request.setAttribute("pn", check);
+            
+            //ดึงค่า session
+            CheckPrime pn = (CheckPrime)session.getAttribute("pn");
+            //ถ้า session เท่ากับค่าว่าง
+            if(pn == null){
+                pn = new CheckPrime();
+                pn.setNumberInput(InputNum);
+                session.setAttribute("pn", pn);
+            }    
+            
+            pn.setNumberInput(InputNum);
+//            check.setNumberInput(InputNum);
+//            request.setAttribute("pn", check);
         }
 
         getServletContext().getRequestDispatcher("/resource/PrimeNumberView.jsp").forward(request, response);

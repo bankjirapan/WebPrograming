@@ -58,7 +58,8 @@
               <div class="card-footer bg-transparent border-primary">
                     Number : ${pn.numberInput} ${pn.prime}</div>
             </div>
-
+            
+            ${pn}
 
 
         </div>
