@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Model.LineItems;
+import Model.ShopingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,15 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sit.int303.mockup.model.Product;
-import sit.int303.mockup.model.ProductMockup;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author INT303
  */
-@WebServlet(name = "ProductList", urlPatterns = {"/ProductList"})
-public class ProductList extends HttpServlet {
+@WebServlet(name = "ShowCartServlet", urlPatterns = {"/ShowCart"})
+public class ShowCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +35,24 @@ public class ProductList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        ShopingCart cart = (ShopingCart) session.getAttribute("cart");
+        
+        if(session != null){
+            if (cart != null) {
+     
+             List<LineItems> lines = cart.getLineItems();
+             request.setAttribute("cart", cart);
+             getServletContext().getRequestDispatcher("/resource/ProductInfo.jsp").forward(request, response);
 
-        String fileLocation = getServletContext().getRealPath("/");
-        String absoluteFileName = fileLocation + "WEB-INF\\products.txt";
+        } else {
+            response.sendRedirect("ProductList");
+        }
 
-        ProductMockup.setFileLocation(absoluteFileName);
-        List<Product> products = ProductMockup.getProducts();
-
-        request.setAttribute("products", products);
-        getServletContext().getRequestDispatcher("/resource/ProductList.jsp").forward(request, response);
-        //System.out.println(absoluteFileName);
-
+        } else {
+            response.sendRedirect("ProductList");
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,6 +13,10 @@
         <title>JSP Page</title>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.css" />
+
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
@@ -36,14 +40,20 @@
 
 
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <a href="ShowCart">
+                    <button type="button" class="btn btn-primary">
+                        จำนวนสินค้า <span class="badge badge-light">${cart.totalQuantity}</span>
+                        <span class="sr-only">unread messages</span>
+                    </button>
+                    </a>
                 </form>
             </div>
         </nav>
         <div class="container">
             <h1>Product LIST</h1>
-            <table id="example"  class="table table-striped">
+
+
+            <table id="example"  class="table table-border table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -53,6 +63,7 @@
                         <th>Scale</th>
                         <th>Price</th>
                         <th>IMG</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,20 +77,38 @@
                             <td>${p.productLine}</td>
                             <td>${p.productScale}</td>
                             <td>${p.msrp}</td>
-                            <td> <img src="model-images/${p.productCode}.jpg" width="70px" height="70px"></td>
-                    </tr>
-                </c:forEach>
+                            <td> <img data-lightbox src="model-images/${p.productCode}.jpg" width="70px" height="70px"></td>
+                            <td>
+<!--                                <a href="" class="btn btn-success">
+                                    <i class="fa fa-archive" aria-hidden="true"></i>
+                                </a> &nbsp;-->
+                                <form action="AddItemToCart" method="post">
+                                    <input type="text" hidden name="ProductCode" value="${p.productCode}">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                                </form>
+                                
+<!--                                <a class="btn btn-info" href="AddItemToCart?ProductCode=${p.productCode}">
+                                    <i class="fa fa-cart-plus  fa-lg" aria-hidden="true"></i>
+
+                                </a>-->
+                            </td>
+                        </tr>
+                    </c:forEach>
 
                 </tbody>
             </table>
             <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
             <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.js"></script>
+
             <script>
                 $(document).ready(function () {
                     $('#example').DataTable();
+
                 });
             </script>
+
         </div>
     </body>
 </html>

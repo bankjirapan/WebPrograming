@@ -5,14 +5,14 @@
  */
 package Controller;
 
+import Model.ShopingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sit.int303.mockup.model.Product;
 import sit.int303.mockup.model.ProductMockup;
 
@@ -20,8 +20,7 @@ import sit.int303.mockup.model.ProductMockup;
  *
  * @author INT303
  */
-@WebServlet(name = "ProductList", urlPatterns = {"/ProductList"})
-public class ProductList extends HttpServlet {
+public class AddItemToCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +33,22 @@ public class ProductList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String fileLocation = getServletContext().getRealPath("/");
-        String absoluteFileName = fileLocation + "WEB-INF\\products.txt";
-
-        ProductMockup.setFileLocation(absoluteFileName);
-        List<Product> products = ProductMockup.getProducts();
-
-        request.setAttribute("products", products);
-        getServletContext().getRequestDispatcher("/resource/ProductList.jsp").forward(request, response);
-        //System.out.println(absoluteFileName);
-
+                    HttpSession session = request.getSession(true);
+                    
+                    ShopingCart cart = (ShopingCart)session.getAttribute("cart");
+                    
+                    if(cart == null){
+                        cart = new ShopingCart();
+                        session.setAttribute("cart", cart);
+                    }
+                    
+                    String productCode = request.getParameter("ProductCode");
+                    
+                    Product p = ProductMockup.getProduct(productCode);
+                    cart.add(p);
+                    
+                    //getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
+                    response.sendRedirect("ProductList");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
