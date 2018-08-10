@@ -19,24 +19,27 @@
             margin-left: 20%;
         }
     </style>
-    <body onload="window.print();">
+    <body>
         <br>
         <div class="container">
             <div align="center"> <h1>รายการสั่งซื้อ</h1> </div> <br>
             <table class="table">
                 <thead>
                     <tr>
-
+                        <th>NO</th>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Quntity</th>
                         <th>Price</th>
                     </tr>
                 </thead>
+                <c:set var="items" value="${sessionScope.cart.getLineItems() }" />
+                <c:set var="bgColorX" value="lightgray" />
+                <c:set var="bgColorY" value="white" />
                 <tbody>
                     <c:forEach items="${cart.getLineItems()}" var="s" varStatus="ps">
-                        <tr>
-
+                        <tr style="background-color : ${ps.count%2 == 1? bgColorx : bgColorY}">
+                            <td>${ps.count}</td>
                             <td>${s.getProduct().getProductCode()}</td>
                             <td>${s.getProduct().getProductName()}</td>
                             <td>${s.getQuantity()}</td>
@@ -52,8 +55,9 @@
                 <div class="col-md-4">
                     <div>
                     จำนวนสินค้ารวม ${cart.getTotalQuantity()}<br>
-                    ยอดรวมสุทธิ ${cart.getTotalPrice()}
-                </div>
+                    ยอดรวมสุทธิ  <fmt:formatNumber value="${cart.getTotalPrice()}" pattern="#,###.00" />
+                    
+                    </div>
             </div>
 
             <!--            <button class="btn btn-info">$//{cart.getTotalPrice()}</button>-->
