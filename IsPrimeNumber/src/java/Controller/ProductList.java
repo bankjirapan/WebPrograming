@@ -36,7 +36,7 @@ public class ProductList extends HttpServlet {
             throws ServletException, IOException {
 
         String fileLocation = getServletContext().getRealPath("/");
-        String absoluteFileName = fileLocation + "WEB-INF\\products.txt";
+        String absoluteFileName = fileLocation + "WEB-INF/products.txt";
 
         ProductMockup.setFileLocation(absoluteFileName);
         List<Product> products = ProductMockup.getProducts();
