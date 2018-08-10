@@ -19,14 +19,14 @@
             margin-left: 20%;
         }
     </style>
-    <body onload="window.print();">
+    <body>
         <br>
         <div class="container">
             <div align="center"> <h1>รายการสั่งซื้อ</h1> </div> <br>
             <table class="table">
                 <thead>
                     <tr>
-
+                        <th>NO</th>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Quntity</th>
@@ -36,7 +36,7 @@
                 <tbody>
                     <c:forEach items="${cart.getLineItems()}" var="s" varStatus="ps">
                         <tr>
-
+                            <td>${ps.count}</td>
                             <td>${s.getProduct().getProductCode()}</td>
                             <td>${s.getProduct().getProductName()}</td>
                             <td>${s.getQuantity()}</td>
