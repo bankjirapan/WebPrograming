@@ -44,6 +44,7 @@ public class ShowCartServlet extends HttpServlet {
              List<LineItems> lines = cart.getLineItems();
              request.setAttribute("cart", cart);
              getServletContext().getRequestDispatcher("/resource/ProductInfo.jsp").forward(request, response);
+             return;
 
         } else {
             response.sendRedirect("ProductList");

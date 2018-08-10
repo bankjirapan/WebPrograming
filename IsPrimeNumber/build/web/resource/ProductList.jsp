@@ -40,11 +40,11 @@
 
 
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="ShowCart">
-                    <button type="button" class="btn btn-primary">
-                        จำนวนสินค้า <span class="badge badge-light">${cart.totalQuantity}</span>
-                        <span class="sr-only">unread messages</span>
-                    </button>
+                    <a href="ShowCart" target="_blank">
+                        <button  type="button" class="btn btn-primary">
+                            จำนวนสินค้า <span class="badge badge-light">${cart.totalQuantity}</span>
+                            <span class="sr-only">unread messages</span>
+                        </button>
                     </a>
                 </form>
             </div>
@@ -79,18 +79,18 @@
                             <td>${p.msrp}</td>
                             <td> <img data-lightbox src="model-images/${p.productCode}.jpg" width="70px" height="70px"></td>
                             <td>
-<!--                                <a href="" class="btn btn-success">
-                                    <i class="fa fa-archive" aria-hidden="true"></i>
-                                </a> &nbsp;-->
+                                <!--                                <a href="" class="btn btn-success">
+                                                                    <i class="fa fa-archive" aria-hidden="true"></i>
+                                                                </a> &nbsp;-->
                                 <form action="AddItemToCart" method="post">
                                     <input type="text" hidden name="ProductCode" value="${p.productCode}">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
                                 </form>
-                                
-<!--                                <a class="btn btn-info" href="AddItemToCart?ProductCode=${p.productCode}">
-                                    <i class="fa fa-cart-plus  fa-lg" aria-hidden="true"></i>
 
-                                </a>-->
+<!--                                <a class="btn btn-info" href="AddItemToCart?ProductCode=${p.productCode}">
+    <i class="fa fa-cart-plus  fa-lg" aria-hidden="true"></i>
+
+</a>-->
                             </td>
                         </tr>
                     </c:forEach>

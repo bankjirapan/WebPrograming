@@ -11,39 +11,65 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     </head>
-    <body>
+    <style>
+        .dataTables_filter{
+            margin-left: 20%;
+        }
+    </style>
+    <body onload="window.print();">
+        <br>
         <div class="container">
-        <h1>Hello</h1>
-<table class="table table-dark">
-  <thead>
-    <tr>
+            <div align="center"> <h1>รายการสั่งซื้อ</h1> </div> <br>
+            <table class="table">
+                <thead>
+                    <tr>
 
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Quntity</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-      <c:forEach items="${cart.getLineItems()}" var="s" varStatus="ps">
-    <tr>
-       
-      <td>${s.getProduct().getProductCode()}</td>
-      <td>${s.getProduct().getProductName()}</td>
-      <td>${s.getQuantity()}</td>
-      <td>${s.getSalePrice()}</td>
-    </tr>
- </c:forEach>
-  </tbody>
-</table>
-        
-        <button class="btn btn-info">${cart.getTotalPrice()}</button>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quntity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${cart.getLineItems()}" var="s" varStatus="ps">
+                        <tr>
+
+                            <td>${s.getProduct().getProductCode()}</td>
+                            <td>${s.getProduct().getProductName()}</td>
+                            <td>${s.getQuantity()}</td>
+                            <td>${s.getSalePrice()}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div>
+                    จำนวนสินค้ารวม ${cart.getTotalQuantity()}<br>
+                    ยอดรวมสุทธิ ${cart.getTotalPrice()}
+                </div>
+            </div>
+
+            <!--            <button class="btn btn-info">$//{cart.getTotalPrice()}</button>-->
         </div>
-       
-            
-        
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+
+            });
+        </script>
+
     </body>
 </html>
