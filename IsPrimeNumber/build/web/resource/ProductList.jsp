@@ -76,7 +76,7 @@
             <script>
                 $(document).ready(function () {
                     $('#example').DataTable();
-
+                    document.getElementById("")
                 });
             </script>
 
