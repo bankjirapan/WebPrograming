@@ -54,6 +54,8 @@ public class ShowCartServlet extends HttpServlet {
             response.sendRedirect("ProductList");
         }
         
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Session time out");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
