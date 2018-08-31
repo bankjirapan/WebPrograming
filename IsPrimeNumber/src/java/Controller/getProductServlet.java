@@ -7,26 +7,34 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import jpa.Model.Controller.ProductJpaController;
+import jpa.Model.Product;
 
 /**
  *
  * @author bankcom
  */
 public class getProductServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    //นำไฟล์เข้า
+    @PersistenceUnit(unitName = "IsPrimeNumberPU")
+            
+    //ขอ Enntity ชื่อว่า emf
+    EntityManagerFactory emf;
+    
+    //ขอ UserTransation;
+    @Resource
+    UserTransaction utx;
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -38,6 +46,17 @@ public class getProductServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
                     
                 } else {
+                    
+                    ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+                    
+                    Product product = productJpaCtrl.findProduct(productCode);
+                    
+                    //System.out.println("Product code : "+product.getProductcode());
+                    //System.out.println("Product description" + product.getProductdescription());
+               
+                    request.setAttribute("product", product);
+              
+                    getServletContext().getRequestDispatcher("/resource/ViewProductDetail.jsp").forward(request, response);
                     
                 }
         
