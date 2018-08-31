@@ -8,13 +8,19 @@ package Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sit.int303.mockup.model.Product;
-import sit.int303.mockup.model.ProductMockup;
+import javax.transaction.UserTransaction;
+import jpa.Model.Controller.ProductJpaController;
+import jpa.Model.Product;
+//import sit.int303.mockup.model.Product;
+//import sit.int303.mockup.model.ProductMockup;
 
 /**
  *
@@ -22,6 +28,14 @@ import sit.int303.mockup.model.ProductMockup;
  */
 @WebServlet(name = "ProductList", urlPatterns = {"/ProductList"})
 public class ProductList extends HttpServlet {
+
+    @PersistenceUnit(unitName = "IsPrimeNumberPU")
+    //ขอ Enntity ชื่อว่า emf
+    EntityManagerFactory emf;
+
+    //ขอ UserTransation;
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,12 +49,16 @@ public class ProductList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        /*
         String fileLocation = getServletContext().getRealPath("/");
         String absoluteFileName = fileLocation + "WEB-INF/products.txt";
 
         ProductMockup.setFileLocation(absoluteFileName);
         List<Product> products = ProductMockup.getProducts();
-
+        
+         */
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+        List<Product> products = productJpaCtrl.findProductEntities();
         request.setAttribute("products", products);
         getServletContext().getRequestDispatcher("/resource/ProductList.jsp").forward(request, response);
         //System.out.println(absoluteFileName);

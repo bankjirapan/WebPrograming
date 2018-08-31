@@ -43,22 +43,22 @@
                         <tr>
 
                             <td>${vs.count}</td>
-                            <td><a target="_blank" href="getProduct?productCode=${p.productCode}"</a>${p.productCode}</td>
-                            <td>${p.productName}</td>
-                            <td>${p.productLine}</td>
-                            <td>${p.productScale}</td>
+                            <td><a target="_blank" href="getProduct?productCode=${p.productcode}"</a>${p.productcode}</td>
+                            <td>${p.productname}</td>
+                            <td>${p.productline.productline}</td>
+                            <td>${p.productscale}</td>
                             <td>${p.msrp}</td>
-                            <td> <img data-lightbox src="model-images/${p.productCode}.jpg" width="70px" height="70px"></td>
+                            <td> <img data-lightbox src="model-images/${p.productcode}.jpg" width="70px" height="70px"></td>
                             <td>
                                 <!--                                <a href="" class="btn btn-success">
                                                                     <i class="fa fa-archive" aria-hidden="true"></i>
                                                                 </a> &nbsp;-->
                                 <form action="AddItemToCart" method="post">
-                                    <input type="text" hidden name="ProductCode" value="${p.productCode}">
+                                    <input type="text" hidden name="ProductCode" value="${p.productcode}">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
                                 </form>
 
-<!--                                <a class="btn btn-info" href="AddItemToCart?ProductCode=${p.productCode}">
+<!--                                <a class="btn btn-info" href="AddItemToCart?ProductCode=${p.productcode}">
     <i class="fa fa-cart-plus  fa-lg" aria-hidden="true"></i>
 
 </a>-->
