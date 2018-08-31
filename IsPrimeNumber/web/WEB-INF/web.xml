@@ -16,6 +16,10 @@
         <servlet-name>ChooseBackgroudServlet</servlet-name>
         <servlet-class>Controller.ChooseBackgroudServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getProductServlet</servlet-name>
+        <servlet-class>Controller.getProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IsPrimeNumberController</servlet-name>
         <url-pattern>/IsPrimeNumberController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ChooseBackgroudServlet</servlet-name>
         <url-pattern>/ChooseBackgroud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProductServlet</servlet-name>
+        <url-pattern>/getProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
