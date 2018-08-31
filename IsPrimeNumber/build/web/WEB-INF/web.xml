@@ -12,6 +12,10 @@
         <servlet-name>AddItemToCartServlet</servlet-name>
         <servlet-class>Controller.AddItemToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChooseBackgroudServlet</servlet-name>
+        <servlet-class>Controller.ChooseBackgroudServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IsPrimeNumberController</servlet-name>
         <url-pattern>/IsPrimeNumberController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>AddItemToCartServlet</servlet-name>
         <url-pattern>/AddItemToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChooseBackgroudServlet</servlet-name>
+        <url-pattern>/ChooseBackgroud</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
