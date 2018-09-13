@@ -8,10 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ComCenter</title>
+        <meta charset="UTF-8">
+        <title>${param.title}</title>
     </head>
     <body>
-        
-    </body>
-</html>
+            

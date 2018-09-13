@@ -32,7 +32,7 @@ public class ListCustomerServlet extends HttpServlet {
       
            
             
-            getServletContext().getRequestDispatcher("View/ListView.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/View/ListView.jsp").forward(request, response);
             
             
             

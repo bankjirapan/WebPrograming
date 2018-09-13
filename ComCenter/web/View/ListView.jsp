@@ -6,4 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1>Hello</h1>
+<jsp:include page="Header.jsp?title=ListCustomer"></jsp:include>
+
+<h1>Hello body</h1>
