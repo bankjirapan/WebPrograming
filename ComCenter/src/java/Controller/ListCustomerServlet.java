@@ -3,33 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Auth;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.UserTransaction;
-import jpa.Model.Controller.CustomerJpaController;
-import jpa.Model.Customer;
 
 /**
  *
  * @author bankcom
  */
-public class LoginServlet extends HttpServlet {
-
-    @Resource
-    UserTransaction utx;
-
-    @PersistenceUnit(unitName = "IsPrimeNumberPU")
-    EntityManagerFactory emf;
+public class ListCustomerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,34 +29,14 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Login Servlet Worked");
-
-        String userName = request.getParameter("username");
-        String passWord = request.getParameter("password");
-
-        if (userName != null && passWord != null) {
+      
+           
+            
+            getServletContext().getRequestDispatcher("View/ListView.jsp").forward(request, response);
             
             
-            CustomerJpaController contomerJpaCtrl = new CustomerJpaController(utx, emf);
             
-            Customer c = contomerJpaCtrl.findCustomer(Integer.valueOf(userName));
-            
-            //ตรวจสอบ object ว่าเท่ากับว่างหรือไม่
-            if(c != null){
-                
-                if(passWord.equals(c.getContactfirstname())){
-                    request.getSession().setAttribute("user", c);
-                    getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-                    return;
-                }     
-            }
-           //กรณี username ผิด
-           request.setAttribute("message", "Invalid user name or password !!");
-            
-        } 
         
-        getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

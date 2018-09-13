@@ -4,6 +4,7 @@
     Author     : bankcom
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -26,6 +27,19 @@
 
 
         <form class="form-inline my-2 my-lg-0">
+      
+        
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  สวัสดี ${sessionScope.user.contactfirstname}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+          
+     
             <a href="ShowCart" target="_blank">
                 <button  type="button" class="btn btn-primary">
                     จำนวนสินค้า <span class="badge badge-light">${cart.totalQuantity}</span>
@@ -36,3 +50,4 @@
     </div>
 </nav>           
 <br>
+
