@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import sit.int303.first.jpa.model.Product;
-import sit.int303.first.jpa.model.controller.ProductJpaController;
+import sit.int303.jpa.model.Product;
+import sit.int303.jpa.model.controller.ProductJpaController;
+
 //import sit.int303.mockup.model.Product;
 import sit.int303.mockup.model.ProductMockup;
 
@@ -26,7 +27,7 @@ import sit.int303.mockup.model.ProductMockup;
  * @author INT303
  */
 public class ProductListServlet extends HttpServlet {
-    @PersistenceUnit(unitName = "MyFirstWebAppPU")
+    @PersistenceUnit(unitName = "MyFirstWebPU")
     EntityManagerFactory emf;
     
     @Resource

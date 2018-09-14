@@ -15,15 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import sit.int303.first.jpa.model.Product;
-import sit.int303.first.jpa.model.controller.ProductJpaController;
+import sit.int303.jpa.model.Product;
+import sit.int303.jpa.model.controller.ProductJpaController;
+
 
 /**
  *
  * @author INT303
  */
 public class GetProductServlet extends HttpServlet {
-    @PersistenceUnit(unitName="MyFirstWebAppPU")
+    @PersistenceUnit(unitName="MyFirstWebPU")
     EntityManagerFactory emf;
     
     @Resource

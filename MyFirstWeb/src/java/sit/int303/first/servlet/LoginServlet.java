@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import sit.int303.first.jpa.model.Customer;
-import sit.int303.first.jpa.model.controller.CustomerJpaController;
+import sit.int303.jpa.model.Customer;
+import sit.int303.jpa.model.controller.CustomerJpaController;
+
 
 /**
  *
@@ -28,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Resource
     UserTransaction utx;
 
-    @PersistenceUnit(unitName = "MyFirstWebAppPU")
+    @PersistenceUnit(unitName = "MyFirstWebPU")
     EntityManagerFactory emf;
 
     /**
@@ -48,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             CustomerJpaController cumtomerJpaCtrl = new CustomerJpaController(utx, emf);
             Customer c = cumtomerJpaCtrl.findCustomer(Integer.valueOf(userName));
             if (c != null) {
-                if (password.equals(c.getContactfirstname())) {
+                if (password.equals(c.getContactfirstname().trim())) {
                     request.getSession().setAttribute("user", c);
                     getServletContext().getRequestDispatcher("/index.html").forward(request, response);
                     return;
