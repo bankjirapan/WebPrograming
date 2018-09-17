@@ -7,6 +7,7 @@ package sit.int303.jpa.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +61,13 @@ public class Register implements Serializable {
     @Column(name = "ACTIVATEDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date activatedate;
+
+    public Register(String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.regdate = new Date();
+        this.acruvatekey = UUID.randomUUID().toString().replace("-", "").substring(0, 15);
+    }
 
     public Register() {
     }
@@ -138,5 +146,5 @@ public class Register implements Serializable {
     public String toString() {
         return "sit.int303.jpa.model.Register[ email=" + email + " ]";
     }
-    
+
 }
