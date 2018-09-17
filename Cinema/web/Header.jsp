@@ -32,7 +32,7 @@
                         <a class="nav-link" href="#">Buy Ticket</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Manager</a>
+                        <a class="nav-link" href="ticketmanager">Manager</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
