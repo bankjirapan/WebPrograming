@@ -8,8 +8,8 @@
         <div class="card-body">
             <form action="Login" method="POST">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="text" class="form-control" aria-describedby="emailHelp" name="username" placeholder="Enter UserName" required>
+                    <label for="exampleInputEmail1">UserID</label>
+                    <input type="text" class="form-control" aria-describedby="emailHelp" name="userid" placeholder="User ID" required>
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="form-group">

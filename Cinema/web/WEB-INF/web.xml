@@ -22,6 +22,10 @@
         <servlet-name>TicketManagerServlet</servlet-name>
         <servlet-class>cimena.controller.TicketManagerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>cimena.controller.RegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListServlet</servlet-name>
         <url-pattern>/MoviesList</url-pattern>
@@ -33,6 +37,10 @@
     <servlet-mapping>
         <servlet-name>TicketManagerServlet</servlet-name>
         <url-pattern>/ticketmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

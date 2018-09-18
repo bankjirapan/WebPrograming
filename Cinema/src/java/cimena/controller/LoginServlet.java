@@ -44,38 +44,45 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
+        String userid = request.getParameter("userid");
         String password = request.getParameter("password");
 
-        if (username == null && password == null) {
-
-            getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
-
-        } else {
-
-            UsersJpaController userCtrl = new UsersJpaController(psw, utx);
-
-            Users user = userCtrl.findUsers(username);
-
-            if (user != null) {
-
-                if (password.equals(user.getPassword().trim())) {
-
-                    request.getSession().setAttribute("loggedIn", user);
-
-                    //response.sendRedirect("ticketmanager");
-                    getServletContext().getRequestDispatcher("/ticketmanager").forward(request, response);
-                    return;
-
-                }
-
-                request.setAttribute("message", "ไม่พบผู้ใช้งานนี้");
-
-            }
-            request.setAttribute("message", "Invalid Username or password");
-            getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
-
+         
+      
+        
+        if(userid != null && password != null){
+            
+              UsersJpaController user = new UsersJpaController(psw, utx);
+              
+              Users u = user.findUsers(userid);
+              
+              if(u != null){
+                  
+                  
+                  String passwordDB = u.getPassword().trim();
+                  
+                  if(password.equals(passwordDB)){
+                      
+                      request.getSession().setAttribute("loggedIn", u);
+                      
+                      response.sendRedirect("ticketmanager");
+                      return;
+                      
+                  }
+                  
+                  
+              } 
+              
+              request.setAttribute("message","Username or Password invalid");
+              getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+            
+            
         }
+        
+        
+        getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
