@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp?titleName=Login"></jsp:include>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <br>
 <div class="container">
     <div align="center"><h1>Login Page</h1></div>
@@ -7,12 +9,12 @@
             <form action="Login" method="POST">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="text" class="form-control" aria-describedby="emailHelp" name="username" placeholder="Enter UserName">
+                    <input type="text" class="form-control" aria-describedby="emailHelp" name="username" placeholder="Enter UserName" required>
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -20,12 +22,21 @@
                 </div>
                 <br>
                 <div align="center">
-                <button type="submit" class="btn btn-info btn-lg">Sign in</button>
-                <a href="Register" class="btn btn-primary btn-lg">Register</a>
+                    <button type="submit" class="btn btn-info btn-lg">Sign in</button>
+                    <a href="Register" class="btn btn-primary btn-lg">Register</a>
                 </div>
             </form>
         </div>
+
     </div>
+    <br>
+    
+    <c:if test="${message != null}">
+    <div class="alert alert-danger" role="alert">
+        ${message}
+    </div>
+    </c:if>
+            
 </div>
 </body>
 </html>
