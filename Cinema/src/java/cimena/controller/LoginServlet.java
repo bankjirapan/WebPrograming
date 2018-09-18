@@ -68,7 +68,8 @@ public class LoginServlet extends HttpServlet {
                     
                     request.getSession().setAttribute("loggedIn", user);
                     
-                    response.sendRedirect("ticketmanager");
+                    //response.sendRedirect("ticketmanager");
+                    getServletContext().getRequestDispatcher("/ticketmanager").forward(request, response);
                     return;
                     
                 }
