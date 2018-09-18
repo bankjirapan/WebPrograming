@@ -32,10 +32,12 @@
     <br>
     
     <c:if test="${message != null}">
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-${message == "Username or Password invalid" ? 'danger' : 'success'}" role="alert">
         ${message}
     </div>
     </c:if>
+    
+    
             
 </div>
 </body>
