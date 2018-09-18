@@ -10,8 +10,8 @@
         <div class="card-body">
             <form action="Register" method="POST">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="inputEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="exampleInputEmail1">UserID</label>
+                    <input type="text" name="UserID" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User ID">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="texr" name="bame" class="form-control" id="name" placeholder="Name">
+                    <input type="texr" name="name" class="form-control" id="name" placeholder="Name">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
