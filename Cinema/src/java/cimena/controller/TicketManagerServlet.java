@@ -5,18 +5,33 @@
  */
 package cimena.controller;
 
+import cinema.jpa.controller.MoviesListJpaController;
+import cinema.jpa.model.MoviesList;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author bankcom
  */
 public class TicketManagerServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "CinemaPU")
+
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,22 +44,32 @@ public class TicketManagerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TicketManagerServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TicketManagerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
+        Cookie MovieID[] = request.getCookies();
+
+        //String ValueMovieID = MovieID[1].getValue();
+        if (MovieID != null) {
+
+            for (int i = 0; i < MovieID.length; i++) {
+
+                if (MovieID[i].getName().equals("MovieID")) {
+
+                    MoviesListJpaController movieCtrl = new MoviesListJpaController(utx, emf);
+
+                    MoviesList Ml = movieCtrl.findMoviesList(MovieID[i].getValue());
+
+                    request.setAttribute("MovieBuy", Ml);
+                    getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
+
+                }
+
+            }
+
+        }
+        getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -71,6 +96,7 @@ public class TicketManagerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
