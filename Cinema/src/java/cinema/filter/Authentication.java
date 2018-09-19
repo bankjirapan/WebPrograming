@@ -44,7 +44,7 @@ public class Authentication implements Filter {
         
         if(session == null || session.getAttribute("loggedIn") == null){
             config.getServletContext().getRequestDispatcher("/Login").forward(request, response);
-            return;
+          
         } else {
             
             //คือการทำงานไล่ตาม Chain
