@@ -10,6 +10,12 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authentication</filter-name>
+        <servlet-name>BuyTicketServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>MoviesListServlet</servlet-name>
         <servlet-class>cimena.controller.MoviesListServlet</servlet-class>
@@ -26,6 +32,10 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>cimena.controller.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuyTicketServlet</servlet-name>
+        <servlet-class>cimena.controller.BuyTicketServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListServlet</servlet-name>
         <url-pattern>/MoviesList</url-pattern>
@@ -41,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyTicketServlet</servlet-name>
+        <url-pattern>/BuyTicket</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
