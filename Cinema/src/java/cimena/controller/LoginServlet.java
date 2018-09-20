@@ -47,6 +47,13 @@ public class LoginServlet extends HttpServlet {
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
 
+        
+        HttpSession session = request.getSession(false);
+        
+        if(session.getAttribute("loggedIn") != null){
+            response.sendRedirect("ticketmanager");
+            return;
+        }
          
       
         
