@@ -7,16 +7,31 @@ package todoList.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import todoList.jpa.Controller.AccountJpaController;
+import todoList.jpa.models.Account;
 
 /**
  *
  * @author bankcom
  */
 public class LoginServlets extends HttpServlet {
+    
+    @PersistenceUnit(unitName = "ToDoListsPU")
+    
+    EntityManagerFactory emf;
+    
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +44,51 @@ public class LoginServlets extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlets</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlets at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        if (username != null && password != null && username.length() != 0) {
+            
+            AccountJpaController accountCtrl = new AccountJpaController(utx, emf);
+            
+            Account ac = accountCtrl.findAccount(username);
+            
+            if (ac != null) {
+                
+                if (ac.getPassword().equals(cryptWithMD5(password))) {
+                    
+                    request.getSession().setAttribute("LoggedIn", ac);
+                    response.sendRedirect("Task");
+                    return;
+                }
+                
+            }
+            
+            request.setAttribute("msg", "Username or Password invalid");
+            getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+            
         }
+        
+        getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+        
+    }
+    
+    public static String cryptWithMD5(String pass) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < digested.length; i++) {
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
