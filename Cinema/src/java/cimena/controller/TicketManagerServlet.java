@@ -60,10 +60,20 @@ public class TicketManagerServlet extends HttpServlet {
 
                     request.setAttribute("MovieBuy", Ml);
                     getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
-
+                    return;
                 }
 
             }
+
+        }
+
+        if (request.getParameter("confirm") != null) {
+            Cookie Mc = new Cookie("MovieID", "a");
+            Mc.setPath("/Cinema");
+            response.addCookie(Mc);
+            response.sendRedirect("ticketmanager");
+            return;
+            
 
         }
         getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
