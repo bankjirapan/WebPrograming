@@ -36,6 +36,10 @@
         <servlet-name>BuyTicketServlet</servlet-name>
         <servlet-class>cimena.controller.BuyTicketServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoggoutServlets</servlet-name>
+        <servlet-class>cimena.controller.LoggoutServlets</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MoviesListServlet</servlet-name>
         <url-pattern>/MoviesList</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>BuyTicketServlet</servlet-name>
         <url-pattern>/BuyTicket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoggoutServlets</servlet-name>
+        <url-pattern>/Loggout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
