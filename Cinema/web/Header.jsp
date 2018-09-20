@@ -47,7 +47,7 @@
                     <c:if test="${sessionScope.loggedIn != null}">
 
                         <a href="Login" class="btn btn-outline-success">สวัสดี : ${sessionScope.loggedIn.name}</a> &nbsp;
-                        <a href="#" class="btn btn-outline-danger">ออกจากระบบ</a>
+                        <a href="Loggout" class="btn btn-outline-danger">ออกจากระบบ</a>
 
                     </c:if>
                 </div>
