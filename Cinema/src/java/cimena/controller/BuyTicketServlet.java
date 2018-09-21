@@ -7,8 +7,11 @@ package cimena.controller;
 
 import cinema.jpa.controller.MoviesListJpaController;
 import cinema.jpa.model.MoviesList;
+import cinema.jpa.model.Users;
+import cinema.models.BuyTicket;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -18,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
 /**
@@ -25,11 +29,11 @@ import javax.transaction.UserTransaction;
  * @author bankcom
  */
 public class BuyTicketServlet extends HttpServlet {
-    
+
     @PersistenceUnit(unitName = "CinemaPU")
-    
+
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
 
@@ -44,31 +48,57 @@ public class BuyTicketServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
+
         MoviesListJpaController movieCtrl = new MoviesListJpaController(utx, emf);
-        
+
         List<MoviesList> Ml = movieCtrl.findMoviesListEntities();
-        
-        
-        String MoviesBuy = request.getParameter("MoviesID");
-        
-        
-        if(MoviesBuy != null){
-            Cookie Mc = new Cookie("MovieID", MoviesBuy);
-            response.addCookie(Mc);
-            response.sendRedirect("ticketmanager");
-            return;
+
+        String MovieID = request.getParameter("MoviesID");
+
+        if (MovieID != null) {
+
+            MoviesList getMovies = movieCtrl.findMoviesList(MovieID);
+
+            if (getMovies != null) {
+
+                HttpSession session = request.getSession(false);
+
+                BuyTicket buy;
+
+                if (session.getAttribute("BuyTickets") == null) {
+
+                    List<BuyTicket> buyticket = new ArrayList<>();
+
+                    buyticket = (ArrayList) session.getAttribute("BuyAtLists");
+
+                    //System.out.println(buyticket);
+                    if (buyticket == null) {
+                        buyticket = new ArrayList<>();
+                    }
+
+                    String Namecustomer = "Bank";
+                    String MovieName = getMovies.getMoviename();
+                    String Branch = getMovies.getBranch();
+                    String theater = getMovies.getTheater();
+
+                    buy = new BuyTicket(Namecustomer, MovieName, Branch, theater);
+
+                    buyticket.add(buy);
+
+                    session.setAttribute("BuyAtLists", buyticket);
+                    response.sendRedirect("ticketmanager");
+
+                    return;
+
+                }
+
+            }
+
         }
-        
-        
-        
+
         request.setAttribute("AttrMovies", Ml);
-        
         getServletContext().getRequestDispatcher("/BuyticketView.jsp").forward(request, response);
-        
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
