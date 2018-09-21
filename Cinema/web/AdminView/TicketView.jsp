@@ -16,23 +16,22 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>ชื่อ</th>
-                    <th>โรงหนัง</th>
-                    <th>เวลาฉาย</th>
-                    <th>ยืนยันการสั่งซื้อ</th>
+                    <th>ชื่อหนัง</th>
+                    <th>สาขา</th>
+                    <th>โรงที่</th>
+
                 </tr>
             </thead>
             <tbody>
 
-
+            <c:forEach items="${BuyAtLists}" var="Show">
                 <tr>
-                    <td>1</td>
-                    <td>${MovieBuy.moviename}</td>
-                <td>${MovieBuy.branch}</td>
-                <td><fmt:formatDate value="${MovieBuy.date}" pattern="yyyy-MM-dd" /> เวลาฉาย <fmt:formatDate value="${MovieBuy.showtime}" pattern="HH:mm" /></td>
-                <td><a class="btn btn-outline-success" href="ticketmanager?confirm=${MovieBuy.movieid}">ยืนยันการสั่งซื้อ</a></td>
-            </tr>
+                    <td>${Show.movieName}</td>
+                    <td>${Show.branch}</td>
+                    <td>${Show.theater}</td>
+
+                </tr>
+            </c:forEach>
 
 
         </tbody>
