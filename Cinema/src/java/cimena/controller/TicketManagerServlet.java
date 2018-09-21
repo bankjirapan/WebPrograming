@@ -7,6 +7,7 @@ package cimena.controller;
 
 import cinema.jpa.controller.MoviesListJpaController;
 import cinema.jpa.model.MoviesList;
+import cinema.models.BuyTicket;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
 /**
@@ -44,38 +46,8 @@ public class TicketManagerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
 
-        Cookie MovieID[] = request.getCookies();
-
-        //String ValueMovieID = MovieID[1].getValue();
-        if (MovieID != null) {
-
-            for (int i = 0; i < MovieID.length; i++) {
-
-                if (MovieID[i].getName().equals("MovieID")) {
-
-                    MoviesListJpaController movieCtrl = new MoviesListJpaController(utx, emf);
-
-                    MoviesList Ml = movieCtrl.findMoviesList(MovieID[i].getValue());
-
-                    request.setAttribute("MovieBuy", Ml);
-                    getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
-                    return;
-                }
-
-            }
-
-        }
-
-        if (request.getParameter("confirm") != null) {
-            Cookie Mc = new Cookie("MovieID", "a");
-            Mc.setPath("/Cinema");
-            response.addCookie(Mc);
-            response.sendRedirect("ticketmanager");
-            return;
-            
-
-        }
         getServletContext().getRequestDispatcher("/AdminView/TicketView.jsp").forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
